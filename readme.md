@@ -8,7 +8,7 @@
 | Mongoose | It is a mongoDb modeling tool for Nodejs. It allows communication between mongoDB and and Nodejs server |
 | Nodemon | Automatically restarts the node application when file changes in the directory are detected |
 | CORS *(Cross Origin Resource Sharing)* | A mechanism by which a front-end client can make requests for resources to an external back-end server|
-| bcryptjs | A module responsible for encrypting passwords |
+| bcryptjs | A module responsible for encrypting and decrypting passwords |
 </s> |
 <!-- | Body Parser | Parse incoming request bodies in a middleware | -->
 
@@ -20,6 +20,7 @@ To test this code, you will need to use an API testing tool called "Postman".
     a. To Register User: [Register New User](./read/signupUser.png)
     
     b. To Login User: [Sign In User](./read/loginUser.png)
+
     
 2. Products
 
