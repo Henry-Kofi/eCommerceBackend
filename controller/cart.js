@@ -13,15 +13,17 @@ exports.getCartProducts = async(req,res) => {
 }
 
 exports.addProductInCart = async(req,res) => {
-    const {productId,count} = req.body
-    const userId = req.params.id
+    const {userId,count} = req.body
+    const productId = req.params.id
     try{
         await Cart.create({
             userId,
             productId,
             count
         })
-        return res.status(200).json({message:'product Added to cart Successfully'})
+        return res.status(200).json({
+            success:true,
+            message:'product Added to cart Successfully'})
     }catch(err){
         console.log(err)
         return res.status(302).json({message:err})
@@ -37,10 +39,10 @@ exports.updateProductInCart = async(req,res) => {
             {userId:userId,productId:productId,count:count},
             {upsert: true}
         )
-        console.log('Product added to cart successfully')
+        console.log('Cart updated successfully')
         res.status(200).json({
             success:true,
-            message:'Product added to cart successfully' })
+            message:'Cart updated successfully' })
     }catch(err){
         console.log(err)
         return res.status(303).json({message:err})
@@ -48,8 +50,9 @@ exports.updateProductInCart = async(req,res) => {
 }
 
 exports.deleteProductInCart  = async(req,res) => {
+    const {cartId} = req.body 
     try{
-        await Cart.findByIdAndDelete(req.params.id)
+        await Cart.findByIdAndDelete(cartId)
         console.log(`Product deleted successfully`)
         return res.status(200).json({success:true, message:'Item deleted'})
     }catch(err){

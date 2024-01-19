@@ -7,7 +7,7 @@ const {addNewProduct,
     deleteProduct} = require("../controller/product")
 
 router.post("/create",addNewProduct);
-router.get("/read/:id",getProducts)
+router.get("/read",getProducts)
 router.put("/update/:id",updateProduct);
 router.delete("/delete/:id",deleteProduct)
 

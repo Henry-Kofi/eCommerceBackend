@@ -12,6 +12,6 @@ const {
 router.post('/add/:id',addProductInCart)
 router.get('/read/:id',getCartProducts)
 router.put('/update/:id',updateProductInCart)
-router.delete('/delete/:id',deleteProductInCart)
+router.delete('/delete',deleteProductInCart)
 
 module.exports = router
