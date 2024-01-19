@@ -1,0 +1,47 @@
+const express = require('express');
+const cookieParser = require('cookie-parser')
+const mongoose = require('mongoose')
+const cors = require('cors');
+require('dotenv').config();
+const {MONGO_URL,PORT} =process.env;
+
+const app = express();
+app.use(cookieParser());
+
+MONGO_URL = "mongodb://127.0.0.1:27017/LoveArena"
+mongoose.connect(MONGO_URL)
+.then(()=>console.log("Database Connected Successfully"))
+.catch((err)=> console.log(err))
+
+// app.get('/',(req,res) => {
+//     res.send('Welcome to HTTP COOKIE')
+// });
+
+// app.get('/setcookie',(req,res) => {
+//     res.cookie(`cookie token name`,`Encrypted cookie`,{
+//         maxAge:5000,
+
+//         expires:new Date('06 12 2023'),
+//         secure:true,
+//         httpOnly:true,
+//         sameSite:'lax'
+//     }),
+//     res.send(`Cookie has been sent successfully`);
+
+//     console.log(req.cookies);
+//     res.send(req.cookies);
+// });
+
+const port = process.env.PORT || 3001;
+
+// app.get('/',(req,res) => {
+//     let username = req.cookies.username;
+
+//     return res.render('home',{
+//         username
+//     })
+// })
+app.listen(port, () => console.log(`Server running at port ${port}`))
+
+
+app.use(express.json());
