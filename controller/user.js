@@ -4,7 +4,7 @@ const {newToken} = require('../util/utility.function')
 
 exports.Signup = async (req,res) => {
     try{
-        const {email,password,username,role,createdAt} = req.body;
+        const {email,password,username,role} = req.body;
         if(!email || !password || !username){
             console.log("All fields are required")
             return res.json({message:'All fields are required'})
@@ -16,7 +16,7 @@ exports.Signup = async (req,res) => {
                 message:`Email ${email} already exists`});
         }
             const hashedPassword = await bcrypt.hash(password,10)
-            const user = await UserModel.create({email,password:hashedPassword,username,role,createdAt});
+            const user = await UserModel.create({email,password:hashedPassword,username,role});
             
             console.log(`${username}'s account has been created successfully`)
         return    res.status(201).json({
@@ -57,12 +57,6 @@ exports.login = async (req,res) => {
                 message:"Invalid Email or password"
             })
         }
-        // console.log(user._id)
-        // const token = createSecretToken(user._id)
-        //     res.cookie("token", token, {
-        //         withCredentials: true,
-        //         httpOnly: false,
-        //       });
         let token = newToken(user)
         res.cookie("token",token,{
             withCredentials: true,
@@ -79,6 +73,32 @@ exports.login = async (req,res) => {
     catch(error){
         console.error(error)
         return res.status(400).json({success:false, message:error.message})
+    }
+}
+
+exports.update = async(req,res) => {
+    const {email,username,newPassword,oldPassword,role} = req.body
+    try{
+        const userId = req.params.id
+        const user = await UserModel.findById(userId)
+
+        const auth = await bcrypt.compare(oldPassword,user.password)
+
+        if(!auth){
+            console.log('Password mismatch')
+            return res.status(203).json({success:false, message:"Password mismatch"})
+        }
+        
+        await UserModel.findByIdAndUpdate(userId,{
+            email,
+            username,
+            newPassword,
+            role})
+        console.log("Account Updated Successfully")
+        res.status(200).json({success:true, message:"Account updated successfully"})
+    }catch(err){
+        console.log(err)
+        res.status(500).json({success:false, message: err.message})
     }
 }
 

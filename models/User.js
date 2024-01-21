@@ -18,13 +18,8 @@ const UserSchema = new mongoose.Schema({
     role:{
         type:String,
         required:true
-    },
-    createdAt:{
-        type:Date,
-        default: new Date()
-    }
-    
-})
+    }   
+},{timestamps:true})
 
 // UserSchema.pre("save", async  () => {
 //     this.password = await bcrypt.hash(this.password, 12);
