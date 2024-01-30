@@ -84,18 +84,20 @@ exports.update = async(req,res) => {
 
         const auth = await bcrypt.compare(oldPassword,user.password)
 
-        if(!auth){
+        if(auth){
             console.log('Password mismatch')
             return res.status(203).json({success:false, message:"Password mismatch"})
+        }else{
+            await UserModel.findByIdAndUpdate(userId,{
+                email,
+                username,
+                newPassword,
+                role})
+            console.log("Account Updated Successfully")
+            res.status(200).json({success:true, message:"Account updated successfully"})
+       
         }
         
-        await UserModel.findByIdAndUpdate(userId,{
-            email,
-            username,
-            newPassword,
-            role})
-        console.log("Account Updated Successfully")
-        res.status(200).json({success:true, message:"Account updated successfully"})
     }catch(err){
         console.log(err)
         res.status(500).json({success:false, message: err.message})

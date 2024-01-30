@@ -7,10 +7,10 @@
 | Express | A minimal and flexible Node.js web application framework that provides a robust set of features|
 | Mongoose | It is a mongoDb modeling tool for Nodejs. It allows communication between mongoDB and and Nodejs server |
 | Nodemon | Automatically restarts the node application when file changes in the directory are detected |
-| CORS *(Cross Origin Resource Sharing)* | A mechanism by which a front-end client can make requests for resources to an external back-end server|
+| CORS *(Cross Origin Resource Sharing)* | A mechanism  which allows a client to make requests for resources from an external  server|
 | bcryptjs | A module responsible for encrypting and decrypting passwords |
+| JWT(Json Web Token) | It provides a standard and secured means for transferring information between the client and server in the form of a json object |
 </s> |
-<!-- | Body Parser | Parse incoming request bodies in a middleware | -->
 
 ### Testing Code Using Postman
 To test this code, you will need to use an API testing tool called "Postman". 
